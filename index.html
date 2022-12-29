@@ -134,11 +134,11 @@
 			<div id=idbHider style=display:none><input name=a type=radio id=rIndexedDB />IndexedDB (Need exit correctly to save changes)<br></div>
 			<input name=a type=radio id=rLocalStorage />LocalStorage (Sometimes not enough space)<br>
 			<input name=a type=radio id=rNone checked=true />None(in RAM)<br><br>
+			
 			<hr>
 			Select game data source:<br><br>
-			<div id=pkgHider style=display:none><input name=b type=radio id=rPackage checked=true />Emscripten package from server (cached in IndexedDB if availiable)<select id=selectPkg style=display:none></select><br></div>
-			<div id=zipHider style=display:none><input name=b type=radio id=rZip />ZIP archive from server (slower, but smaller, no IndexedDB cache)<select id=selectZip style=display:none></select><br></div>
-			<input name=b type=radio id=rLocalZip  />Local ZIP file:<input type=file name=c id=iZipFile /><br><br>
+			<input type=file name=c id=iZipFile />
+
 			<hr>
 			Command-line arguments: <input name=d type=text id=iArgs /><br><br>
 
@@ -170,62 +170,7 @@
 		var mfs;
 		var zipSize;
 
-
-		// make BrowserFS to work on ES5 browsers
-		if (!ArrayBuffer['isView']) {
-			ArrayBuffer.isView = function(a) {
-				return a !== null && typeof(a) === "object" && a['buffer'] instanceof ArrayBuffer;
-			};
-
-		}
-
 		showElement('optionsTitle', false);
-
-		function prepareSelects()
-		{
-			var len = zipMods.length;
-			var select = document.getElementById('selectZip');
-			if( len )
-			{
-				showElement('zipHider', true);
-
-				if(len > 1)
-				{
-					var links = '';
-					for(var i = 0; i < len; i++)
-					{
-						select.options[i] = new Option(zipMods[i][1], zipMods[i][0]);
-						links += '<br><a href="'+zipMods[i][0]+'">'+zipMods[i][1]+'</a>';
-					}
-					select.style.display = 'block';
-					document.getElementById('linksPlaceholder').innerHTML += links;
-					showElement('linksPlaceholder', true);
-				}
-			}
-			else
-				document.getElementById('rZip').checked = false;
-			len = pkgMods.length;
-			select = document.getElementById('selectPkg');
-			if( len )
-			{
-				showElement('pkgHider', true);
-
-				if(len > 1)
-				{
-					for(var i = 0; i < len; i++)
-						select.options[i] = new Option(pkgMods[i][1], pkgMods[i][0]);
-					select.style.display = 'block';
-				}
-			}
-			else
-				document.getElementById('rPackage').checked = false;
-
-			if( !zipMods.length && !len )
-			{
-				document.getElementById('rLocalZip').checked = true;
-				showElement('rLocalZip', false);
-			}
-		}
 
 		try{mem = Math.round(window.location.hash.substring(1));}catch(e){};
 
@@ -356,25 +301,15 @@
 			setupFS();
 			Module.arguments = document.getElementById('iArgs').value.split(' ');
 			Module.run = run = savedRun;
-			if( radioChecked('Zip') )
-				fetchZIP(zipMods.length>1?document.getElementById('selectZip').value:zipMods[0][0], savedRun);
-			else if( (!zipMods.length && !pkgMods.length) || radioChecked('LocalZip') )
-			{
+
 			var reader = new FileReader();
-				reader.onload = function(){
-					mountZIP(reader.result);
-					Module.print("Loaded zip data");
-					savedRun();
-				};
-				reader.readAsArrayBuffer(document.getElementById('iZipFile').files[0]);
-			}
-			else if( radioChecked('Package') )
-			{
-				var script = document.createElement('script');
-				script.onload = savedRun;
-				document.body.appendChild(script);
-				script.src = pkgMods.length>1?document.getElementById('selectPkg').value:pkgMods[0][0];
-			}
+			reader.onload = function(){
+				mountZIP(reader.result);
+				Module.print("Loaded zip data");
+				savedRun();
+			};
+			reader.readAsArrayBuffer(document.getElementById('iZipFile').files[0]);
+			
 			showElement('canvas', true);
 
 			window.addEventListener("beforeunload", function (e) {
@@ -470,7 +405,7 @@
 
 			if(window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB)
 				showElement('idbHider', true);
-			prepareSelects();
+
 			showElement('fSettings',true);
 
 			ENV.XASH3D_GAMEDIR = gamedir;
