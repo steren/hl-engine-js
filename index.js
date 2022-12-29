@@ -168,38 +168,6 @@ function mountZIP(data)
   FS.mount(new BrowserFS.EmscriptenFS(), {root:'/zip'}, '/rodir');
 }
 
-function fetchZIP(packageName, cb)
-{
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', packageName, true);
-  xhr.responseType = 'arraybuffer';
-
-  xhr.onprogress = function(event) {
-    var url = packageName;
-    var size;
-    if (event.total) size = event.total;
-    if (event.loaded) {
-      var total = size;
-      var loaded = event.loaded;
-      var num = 0;
-      if (Module['setStatus']) Module['setStatus']('Downloading data... (' + loaded + '/' + total + ')');
-    } else if (!Module.dataFileDownloads) {
-      if (Module['setStatus']) Module['setStatus']('Downloading data...');
-    }
-  };
-  xhr.onerror = function(event) {
-    throw new Error("NetworkError");
-  }
-  xhr.onload = function(event) {
-    if (xhr.status == 200 || xhr.status == 304 || xhr.status == 206 || (xhr.status == 0 && xhr.response)) { // file URLs can return 0
-      mountZIP(xhr.response);
-      cb();
-    } else {
-      throw new Error(xhr.statusText + " : " + xhr.responseURL);
-    }
-  };
-  xhr.send(null);
-}
 
 function setupFS()
 {
