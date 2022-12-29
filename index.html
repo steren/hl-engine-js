@@ -13,19 +13,19 @@
 				margin: 0;
 				padding: none;
 				background-color: #555555;
-				color: #f0b418;
+				color: white;
 		  }
 
-		  .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
-		  div.emscripten { text-align: center; }
-		  div.emscripten_border { border: 2px solid #F0b418; }
 		  /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-		  canvas.emscripten { border: 0px none; background-color: black; }
-
-		  @keyframes rotation {
-				from {transform: rotate(0deg);}
-				to {transform: rotate(360deg);}
-		  }
+		  canvas.render { 
+				border: 0px none; 
+				background-color: black;
+				
+				padding-right: 0;
+				margin-left: auto; 
+				margin-right: auto; 
+				display: block;
+			}
 
 		  #controls {
 				display: inline-block;
@@ -50,7 +50,6 @@
 				color: white;
 				font-family: 'Lucida Console', Monaco, monospace;
 				outline: none;
-				border-color:#f0B418;
 		  }
 
 
@@ -67,27 +66,12 @@
 		  0% { transform: rotate(0deg); }
 		  100% { transform: rotate(360deg); }
 		}
-
-		a.glow, a.glow:hover, a.glow:focus
-		{
-			text-decoration: none;
-			color: #F0B418;
-			text-shadow: none;
-			transition: 500ms linear 0s;
-			outline: 0 none;
-		}
-		a.glow:hover, a.glow:focus
-		{
-			color: #ffa600;
-			text-shadow: -1px 1px 8px #ffa600, 1px -1px 8px #ffa600;
-		}
 		</style>
 	</head>
 
 	<body onerror=alert(event); bgcolor=#555555 text=#F0B418 link=#ffa600 vlink=#ffa600>
-		<div class="emscripten_border">
-			<canvas style="display:none" class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
-		</div>
+
+		<canvas style="display:none" class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
 		<p><div style=width:100%;height:0px>
 			<div style="float:left;" id="status">Downloading...</div>
