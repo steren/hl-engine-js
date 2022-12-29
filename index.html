@@ -6,14 +6,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="MobileOptimized" content="640"/>
 		<meta name="HandheldFriendly" content="true"/>
-		<title>Xash3D Emscripten Port</title>
+		<title>Half-Life engine JS demo</title>
 		<style>
 		  body {
-			font-family: arial;
-			margin: 0;
-			padding: none;
-			background-color: #555555;
-			color: #f0b418;
+				font-family: arial;
+				margin: 0;
+				padding: none;
+				background-color: #555555;
+				color: #f0b418;
 		  }
 
 		  .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
@@ -22,48 +22,35 @@
 		  /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
 		  canvas.emscripten { border: 0px none; background-color: black; }
 
-		  @-webkit-keyframes rotation {
-			from {-webkit-transform: rotate(0deg);}
-			to {-webkit-transform: rotate(360deg);}
-		  }
-		  @-moz-keyframes rotation {
-			from {-moz-transform: rotate(0deg);}
-			to {-moz-transform: rotate(360deg);}
-		  }
-		  @-o-keyframes rotation {
-			from {-o-transform: rotate(0deg);}
-			to {-o-transform: rotate(360deg);}
-		  }
 		  @keyframes rotation {
-			from {transform: rotate(0deg);}
-			to {transform: rotate(360deg);}
+				from {transform: rotate(0deg);}
+				to {transform: rotate(360deg);}
 		  }
-
 
 		  #controls {
-			display: inline-block;
-			float: right;
-			vertical-align: top;
-			margin-top: 5px;
-			margin-right: 20px;
+				display: inline-block;
+				float: right;
+				vertical-align: top;
+				margin-top: 5px;
+				margin-right: 20px;
 		  }
 
 		  #output {
-			width: 100%;
-			height: 200px;
-			margin: 0 auto;
-			margin-top: 10px;
-			border-left: 0px;
-			border-right: 0px;
-			border-style: solid;
-			padding-left: 0px;
-			padding-right: 0px;
-			display: block;
-			background-color: black;
-			color: white;
-			font-family: 'Lucida Console', Monaco, monospace;
-			outline: none;
-			border-color:#f0B418;
+				width: 100%;
+				height: 200px;
+				margin: 0 auto;
+				margin-top: 10px;
+				border-left: 0px;
+				border-right: 0px;
+				border-style: solid;
+				padding-left: 0px;
+				padding-right: 0px;
+				display: block;
+				background-color: black;
+				color: white;
+				font-family: 'Lucida Console', Monaco, monospace;
+				outline: none;
+				border-color:#f0B418;
 		  }
 
 
@@ -73,14 +60,7 @@
 		  border-top: 4px solid #ffa600;
 		  width: 16px;
 		  height: 16px;
-		  -webkit-animation: spin 2s linear infinite; /* Safari */
 		  animation: spin 2s linear infinite;
-		}
-
-		/* Safari */
-		@-webkit-keyframes spin {
-		  0% { -webkit-transform: rotate(0deg); }
-		  100% { -webkit-transform: rotate(360deg); }
 		}
 
 		@keyframes spin {
@@ -88,16 +68,11 @@
 		  100% { transform: rotate(360deg); }
 		}
 
-
-
 		a.glow, a.glow:hover, a.glow:focus
 		{
 			text-decoration: none;
 			color: #F0B418;
 			text-shadow: none;
-			-webkit-transition: 500ms linear 0s;
-			-moz-transition: 500ms linear 0s;
-			-o-transition: 500ms linear 0s;
 			transition: 500ms linear 0s;
 			outline: 0 none;
 		}
