@@ -69,7 +69,7 @@
 		</style>
 	</head>
 
-	<body onerror=alert(event); bgcolor=#555555 text=#F0B418 link=#ffa600 vlink=#ffa600>
+	<body>
 
 		<canvas style="display:none" class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
@@ -81,14 +81,14 @@
 		<div class="loader" id=loader1></div>
 
 		<div style=width:100%><span id='controls'>
-			<a class="glow"><span><input type="checkbox" id="resize">Resize canvas</span></a>
-			<a class="glow"><span><input type="checkbox" id="pointerLock" checked>Lock/hide mouse pointer &nbsp;&nbsp;&nbsp;</span></a>
+			<span><input type="checkbox" id="resize">Resize canvas</span>
+			<span><input type="checkbox" id="pointerLock" checked>Lock/hide mouse pointer &nbsp;&nbsp;&nbsp;</span>
 			<span><input type="button" value="Fullscreen" onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked, document.getElementById('resize').checked)"></span>
 		</span></div>
 
 		<textarea id="output" rows="8"></textarea><div  id="asyncDialog" style="float:left"></div>
 
-		<h1 id=optionsTitle>Game Options</h1>
+		<h1 id=optionsTitle>Options</h1>
 
 		<form style=display:none id=fSettings>
 			
@@ -97,7 +97,7 @@
 			<div id=idbHider style=display:none>
 			<input name=a type=radio id=rIndexedDB />IndexedDB (Need exit correctly to save changes)<br></div>
 			<input name=a type=radio id=rLocalStorage />LocalStorage (Sometimes not enough space)<br>
-			<input name=a type=radio id=rNone checked=true />None(in RAM)<br><br>
+			<input name=a type=radio id=rNone checked=true />None (in RAM)<br><br>
 			
 			<hr>
 			Select game data as local .zip file:<br>
@@ -113,23 +113,6 @@
 
 		<script type='text/javascript' src='index.js'></script>
 
-		<script>
-			(function() {
-				var memoryInitializer = 'xash.html.mem';
-				if (typeof Module['locateFile'] === 'function') {
-					memoryInitializer = Module['locateFile'](memoryInitializer);
-				} else if (Module['memoryInitializerPrefixURL']) {
-					memoryInitializer = Module['memoryInitializerPrefixURL'] + memoryInitializer;
-				}
-				var xhr = Module['memoryInitializerRequest'] = new XMLHttpRequest();
-				xhr.open('GET', memoryInitializer, true);
-				xhr.responseType = 'arraybuffer';
-				xhr.send(null);
-			})();
-
-			var script = document.createElement('script');
-			script.src = "xash.js";
-			document.body.appendChild(script);
-		</script>
+		<script type='text/javascript' src='hl-engine.js'></script>
 	</body>
 </html>
