@@ -87,7 +87,7 @@ var Module = {
         progressElement.style.color = progress > 5?'#303030':'#aaa000';
         progressElement.style.width = progressElement.innerHTML = ''+progress+'%';
       }
-      showElement('progress1', !!m);
+      showElement('progress-box', !!m);
     }
   },
   totalDependencies: 0,
