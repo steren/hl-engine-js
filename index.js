@@ -97,6 +97,7 @@ var Module = {
       Module.setStatus('Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')');
   }
 };
+
 window.onerror = function(event) {
   if(mounted)
     FS.syncfs(false, function(err){Module.print('Saving IDBFS: '+err);});
@@ -110,10 +111,6 @@ window.onerror = function(event) {
   Module.setStatus(text);
   Module.print('Exception thrown: ' + event);
 };
-
-function haltRun()
-{
-}
 
 var savedRun;
 
@@ -204,8 +201,8 @@ function setupFS()
 function skipRun()
 {
   savedRun = run;
-  Module.run = haltRun;
-  run = haltRun;
+  Module.run = () => {};
+  run = () => {};
 
   Module.setStatus("Engine downloaded!");
   showElement('loader1', false);
