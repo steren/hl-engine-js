@@ -26,16 +26,16 @@ function setStatus(text) {
     Module.print();
   }
 
-  HlEngineParams.statusElement.innerHTML = text;
-  if( HlEngineParams.progressElement )
+  HLEngineParams.statusElement.innerHTML = text;
+  if( HLEngineParams.progressElement )
   {
     var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
 
     if(m)
     {
       var progress = Math.round(parseInt(m[2])*100/parseInt(m[4]));
-      HlEngineParams.progressElement.style.color = progress > 5?'#303030':'#aaa000';
-      HlEngineParams.progressElement.style.width = HlEngineParams.progressElement.innerHTML = ''+progress+'%';
+      HLEngineParams.progressElement.style.color = progress > 5?'#303030':'#aaa000';
+      HLEngineParams.progressElement.style.width = HLEngineParams.progressElement.innerHTML = ''+progress+'%';
     }
     showElement('progress-box', !!m);
   }
@@ -61,12 +61,12 @@ function print(text) {
   if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
   if(text)
     myerrorbuf += text + '\n';
-  if (HlEngineParams.printOutput) {
-    if(HlEngineParams.printOutput.value.length > 65536)
-      HlEngineParams.printOutput.value = HlEngineParams.printOutput.value.substring(512) + myerrorbuf;
+  if (HLEngineParams.printOutput) {
+    if(HLEngineParams.printOutput.value.length > 65536)
+      HLEngineParams.printOutput.value = HLEngineParams.printOutput.value.substring(512) + myerrorbuf;
     else
-      HlEngineParams.printOutput.value += myerrorbuf;
-    HlEngineParams.printOutput.scrollTop = HlEngineParams.printOutput.scrollHeight; // focus on bottom
+      HLEngineParams.printOutput.value += myerrorbuf;
+    HLEngineParams.printOutput.scrollTop = HLEngineParams.printOutput.scrollHeight; // focus on bottom
   }
   myerrorbuf = ''
 };
@@ -101,7 +101,7 @@ function showElement(id, show)
   e.style.display=show?'block':'none';
 }
 
-function startXash(params)
+function start(params)
 {
   showElement('loader1', false);
   showElement('optionsTitle', false);
@@ -225,7 +225,15 @@ var Module = {
 
 var ENV = [];
 
-Module.setStatus('Downloading...');
 
-loadXash();
+function init(params){
+  Module.setStatus('Downloading...');
+  loadXash();
 
+}
+
+
+const HLEngine = {
+  init: init,
+  start: start,
+}

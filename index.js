@@ -1,4 +1,4 @@
-const HlEngineParams = {
+const HLEngineParams = {
   statusElement: document.getElementById('status'),
   progressElement: document.getElementById('progress'),
   printOutput: document.getElementById('output'),
@@ -6,7 +6,9 @@ const HlEngineParams = {
 }
 
 document.getElementById('start').onclick = function() {
-  HlEngineParams.args = document.getElementById('args').value.split(' ');
+  HLEngineParams.args = document.getElementById('args').value.split(' ');
 
-  startXash(HlEngineParams);
+  HLEngine.start(HLEngineParams);
 }
+
+HLEngine.init();
