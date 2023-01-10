@@ -8,5 +8,5 @@ const HlEngineParams = {
 document.getElementById('start').onclick = function() {
   HlEngineParams.args = document.getElementById('args').value.split(' ');
 
-  startXash();
+  startXash(HlEngineParams);
 }

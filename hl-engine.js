@@ -27,15 +27,15 @@ function setStatus(text) {
   }
 
   HlEngineParams.statusElement.innerHTML = text;
-  if( HlEngineParams.progressElementnt )
+  if( HlEngineParams.progressElement )
   {
     var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
 
     if(m)
     {
       var progress = Math.round(parseInt(m[2])*100/parseInt(m[4]));
-      HlEngineParams.progressElementnt.style.color = progress > 5?'#303030':'#aaa000';
-      HlEngineParams.progressElementnt.style.width = HlEngineParams.progressElementnt.innerHTML = ''+progress+'%';
+      HlEngineParams.progressElement.style.color = progress > 5?'#303030':'#aaa000';
+      HlEngineParams.progressElement.style.width = HlEngineParams.progressElement.innerHTML = ''+progress+'%';
     }
     showElement('progress-box', !!m);
   }
@@ -101,13 +101,13 @@ function showElement(id, show)
   e.style.display=show?'block':'none';
 }
 
-function startXash()
+function startXash(params)
 {
   showElement('loader1', false);
   showElement('optionsTitle', false);
   showElement('fSettings', false);
   setupFS();
-  Module.arguments = HlEngineParams.args
+  Module.arguments = params.args
   Module.run = run = savedRun;
 
   var reader = new FileReader();
