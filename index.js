@@ -15,18 +15,6 @@ showElement('optionsTitle', false);
 
 try{mem = Math.round(window.location.hash.substring(1));}catch(e){};
 
-var Module = {
-  TOTAL_MEMORY: mem * 1024 * 1024,
-  preRun: [],
-  postRun: [],
-  print: print,
-  printErr: printErr,
-  canvas: document.getElementById('canvas'),
-  setStatus: setStatus,
-  totalDependencies: 0,
-  monitorRunDependencies: monitorRunDependencies
-};
-
 function monitorRunDependencies(left) {
   this.totalDependencies = Math.max(this.totalDependencies, left);
   if(left)
@@ -123,9 +111,6 @@ function showElement(id, show)
   if(!e) return;
   e.style.display=show?'block':'none';
 }
-Module.setStatus('Downloading...');
-
-
 
 function startXash()
 {
@@ -215,6 +200,12 @@ function skipRun()
   loadModules();
 };
 
+function loadXash() {
+  var script = document.createElement('script');
+  script.src = "xash.js";
+  document.body.appendChild(script);
+}
+
 function loadModules() {
   function loadModule(name)
   {
@@ -229,7 +220,23 @@ function loadModules() {
   loadModule("menu");
 }
 
-Module.preInit = [skipRun];
-Module.websocket = [];
-Module.websocket.url = 'wsproxy://TODO:3000/'
-ENV = [];
+var Module = {
+  TOTAL_MEMORY: mem * 1024 * 1024,
+  preRun: [],
+  postRun: [],
+  print: print,
+  printErr: printErr,
+  canvas: document.getElementById('canvas'),
+  setStatus: setStatus,
+  totalDependencies: 0,
+  monitorRunDependencies: monitorRunDependencies,
+  preInit: [skipRun],
+  websocket: [],
+};
+
+var ENV = [];
+
+Module.setStatus('Downloading...');
+
+loadXash();
+
