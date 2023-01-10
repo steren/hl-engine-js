@@ -7,8 +7,6 @@ var moduleCount = 0;
 var mfs;
 var zipSize;
 
-showElement('optionsTitle', false);
-
 try{mem = Math.round(window.location.hash.substring(1));}catch(e){};
 
 function monitorRunDependencies(left) {
@@ -37,7 +35,6 @@ function setStatus(text) {
       HLEngineParams.progressElement.style.color = progress > 5?'#303030':'#aaa000';
       HLEngineParams.progressElement.style.width = HLEngineParams.progressElement.innerHTML = ''+progress+'%';
     }
-    showElement('progress-box', !!m);
   }
 };
 
@@ -87,20 +84,9 @@ window.onerror = function(event) {
 
 var savedRun;
 
-
-function showElement(id, show)
-{
-  var e = document.getElementById(id);
-  if(!e) return;
-  e.style.display=show?'block':'none';
-}
-
 function start(params)
 {
   console.log("Starting with params: "+JSON.stringify(params));
-  showElement('loader1', false);
-  showElement('optionsTitle', false);
-  showElement('fSettings', false);
   setupFS(params.filesystem);
   Module.arguments = params.args
   Module.run = run = savedRun;
@@ -113,8 +99,6 @@ function start(params)
   };
   reader.readAsArrayBuffer(HLEngineParams.zipElement.files[0]);
   
-  showElement('canvas', true);
-
   window.addEventListener("beforeunload", function (e) {
     var confirmationMessage = 'Leave the game?';
 
@@ -170,10 +154,6 @@ function skipRun()
   run = () => {};
 
   Module.setStatus("Engine downloaded!");
-  showElement('loader1', false);
-  showElement('optionsTitle', true);
-
-  showElement('fSettings',true);
 
   ENV.XASH3D_GAMEDIR = gamedir;
   ENV.XASH3D_RODIR = '/rodir'

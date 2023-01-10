@@ -30,18 +30,6 @@
 			#status {
 				float:left;
 			}
-
-			#progress-box {
-				position:relative;
-				z-index:10;
-				display:none;
-				float:right;
-				width:70%;
-				border-color:#F0B418;
-				border-style:solid;
-				border-width:2px;
-				height:20px
-			}
 		
 			#progress {
 				text-align:center;
@@ -77,38 +65,14 @@
 				font-family: 'Lucida Console', Monaco, monospace;
 				outline: none;
 		  }
-
-
-		.loader {
-		  border: 4px solid #f3f3f3;
-		  border-radius: 50%;
-		  border-top: 4px solid #ffa600;
-		  width: 16px;
-		  height: 16px;
-		  animation: spin 2s linear infinite;
-		}
-
-		@keyframes spin {
-		  0% { transform: rotate(0deg); }
-		  100% { transform: rotate(360deg); }
-		}
 		</style>
 	</head>
 
 	<body>
 
-		<canvas style="display:none" class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+		<canvas class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
-		<p>
-			<div style=width:100%;height:0px>
-				<div id="status">Downloading...</div>
-				<div id="progress-box">
-					<div id="progress"></div>
-				</div>
-			</div>
-		</p>
-
-		<div class="loader" id=loader1></div>
+		<p id="status">Downloading...</p>
 
 		<div style=width:100%><span id='controls'>
 			<span><input type="checkbox" id="resize">Resize canvas</span>
@@ -120,7 +84,7 @@
 
 		<h1 id=optionsTitle>Options</h1>
 
-		<form style=display:none id=fSettings>
+		<form>
 			
 			Select filesystem for settings and saverestore:<br><br>
 
