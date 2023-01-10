@@ -151,15 +151,11 @@ function start(params)
     mountZIP(reader.result);
     Module.print("Loaded zip data");
     savedRun();
+    if(params.fullscreen) {
+      Module.requestFullscreen(/* pointerLock */ true, /* resize */ false);
+    }
   };
   reader.readAsArrayBuffer(HLEngineParams.zipElement.files[0]);
-  
-  window.addEventListener("beforeunload", function (e) {
-    var confirmationMessage = 'Leave the game?';
-
-    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-  });
 }
 
 

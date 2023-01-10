@@ -2,13 +2,10 @@ document.getElementById('start').onclick = function() {
   const params = {
     args: "",
     filesystem: "RAM", //default, can be "IndexedDB" or "LocalStorage" 
+    fullscreen: true,
   };
   params.args = document.getElementById('args').value.split(' ');  
   HLEngine.start(params);
-}
-
-document.getElementById('fullscreen').onclick = function() {
-  Module.requestFullscreen(/* pointerLock */ true, /* resize */ false);
 }
 
 HLEngine.init({
