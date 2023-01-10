@@ -212,6 +212,10 @@ function skipRun()
   ENV.XASH3D_GAMEDIR = gamedir;
   ENV.XASH3D_RODIR = '/rodir'
 
+  loadModules();
+};
+
+function loadModules() {
   function loadModule(name)
   {
     var script = document.createElement('script');
@@ -223,7 +227,7 @@ function skipRun()
   loadModule("server");
   loadModule("client");
   loadModule("menu");
-};
+}
 
 Module.preInit = [skipRun];
 Module.websocket = [];
