@@ -107,7 +107,7 @@ function startXash()
   showElement('optionsTitle', false);
   showElement('fSettings', false);
   setupFS();
-  Module.arguments = document.getElementById('iArgs').value.split(' ');
+  Module.arguments = HlEngineParams.args
   Module.run = run = savedRun;
 
   var reader = new FileReader();

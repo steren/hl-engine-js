@@ -130,13 +130,12 @@
 			<input name=a type=radio id=rNone checked=true />None (in RAM)<br><br>
 			
 			<hr>
-			Select game data as local .zip file:<br>
-			<input type=file name=c id=iZipFile />
+			<label for="zip">Select game data as local .zip file:</label><br>
+			<input type=file name="zip" id=iZipFile /><br>
 
-			<hr>
-			Command-line arguments: <input name=d type=text id=iArgs /><br><br>
+			<label for="args">Command-line arguments</label> <input type=text id="args" name="args" /><br>
 
-			<input type=button onclick="startXash();return false;" value="Launch" />
+			<input type="button" id="start" value="Launch" />
 		</form>
 
 		<script type='text/javascript' src='browserfs.min.js'></script>
