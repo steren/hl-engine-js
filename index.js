@@ -2,6 +2,8 @@
 var statusElement = document.getElementById('status');
 var progressElement = document.getElementById('progress');
 var asyncDialog = document.getElementById('asyncDialog');
+var printOutput = document.getElementById('output');
+
 var myerrorbuf = ''
 var myerrordate = new Date();
 var mounted = false;
@@ -62,22 +64,15 @@ function printErr(text) {
 };
 
 function print(text) {
-  var element = document.getElementById('output');
   if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-  // These replacements are necessary if you render to raw HTML
-  //text = text.replace(/&/g, "&amp;");
-  //text = text.replace(/</g, "&lt;");
-  //text = text.replace(/>/g, "&gt;");
-  //text = text.replace('\n', '<br>', 'g');
-  //console.log(text);
   if(text)
     myerrorbuf += text + '\n';
-  if (element) {
-    if(element.value.length > 65536)
-      element.value = element.value.substring(512) + myerrorbuf;
+  if (printOutput) {
+    if(printOutput.value.length > 65536)
+      printOutput.value = printOutput.value.substring(512) + myerrorbuf;
     else
-      element.value += myerrorbuf;
-    element.scrollTop = element.scrollHeight; // focus on bottom
+      printOutput.value += myerrorbuf;
+    printOutput.scrollTop = printOutput.scrollHeight; // focus on bottom
   }
   myerrorbuf = ''
 };
