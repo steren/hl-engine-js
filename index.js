@@ -1,10 +1,3 @@
-function radioChecked(id)
-{
-  var r = document.getElementById('r'+id);
-  if(r) return r.checked;
-  return false;
-}
-
 document.getElementById('start').onclick = function() {
   const params = {
     args: "",
