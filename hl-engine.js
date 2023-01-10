@@ -87,12 +87,6 @@ window.onerror = function(event) {
 
 var savedRun;
 
-function radioChecked(id)
-{
-  var r = document.getElementById('r'+id);
-  if(r) return r.checked;
-  return false;
-}
 
 function showElement(id, show)
 {
@@ -103,10 +97,11 @@ function showElement(id, show)
 
 function start(params)
 {
+  console.log("Starting with params: "+JSON.stringify(params));
   showElement('loader1', false);
   showElement('optionsTitle', false);
   showElement('fSettings', false);
-  setupFS();
+  setupFS(params.filesystem);
   Module.arguments = params.args
   Module.run = run = savedRun;
 
@@ -116,7 +111,7 @@ function start(params)
     Module.print("Loaded zip data");
     savedRun();
   };
-  reader.readAsArrayBuffer(document.getElementById('iZipFile').files[0]);
+  reader.readAsArrayBuffer(HLEngineParams.zipElement.files[0]);
   
   showElement('canvas', true);
 
@@ -136,7 +131,7 @@ function mountZIP(data)
 }
 
 
-function setupFS()
+function setupFS(option)
 {
   FS.mkdir('/rodir');
   FS.mkdir('/xash');
@@ -151,14 +146,14 @@ function setupFS()
     Module.print('Failed to initialize BrowserFS: '+e);
   }
 
-  if( radioChecked('IndexedDB'))
+  if( option === 'IndexedDB')
   {
     FS.mount(IDBFS,{},'/xash');
     FS.syncfs(true,function(err){if(err)Module.print('Loading IDBFS: ' + err);});
     mounted = true;
   }
 
-  if( radioChecked('LocalStorage') && mfs)
+  if( option === 'LocalStorage' && mfs)
   {
     mfs.mount('/ls', new BrowserFS.FileSystem.LocalStorage());
     FS.mount(new BrowserFS.EmscriptenFS(), {root:'/ls'}, '/xash');
