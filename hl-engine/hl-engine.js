@@ -96,9 +96,9 @@ function skipRun()
   loadModules();
 };
 
-function loadXash() {
+function loadXash(location) {
   var script = document.createElement('script');
-  script.src = "xash.js";
+  script.src = `${location}/xash.js`;
   document.body.appendChild(script);
 }
 
@@ -108,7 +108,7 @@ function loadModules() {
     var script = document.createElement('script');
     script.onload = function(){moduleCount++;if(moduleCount==3){Module.setStatus("Scripts downloaded!");}};
     document.body.appendChild(script);
-    script.src = name + ".js";
+    script.src = `${HLEngineParams.location}/${name}.js`;
   }
 
   loadModule("server");
@@ -136,7 +136,7 @@ function init(params){
   HLEngineParams = params;
   Module.canvas = params.canvas;
   Module.setStatus('Downloading...');
-  loadXash();
+  loadXash(params.location);
 }
 
 function start(params)
