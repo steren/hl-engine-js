@@ -3,15 +3,7 @@ document.getElementById('start').onclick = function() {
     args: "",
     filesystem: "RAM", //default, can be "IndexedDB" or "LocalStorage" 
   };
-  params.args = document.getElementById('args').value.split(' ');
-  
-  if( document.getElementById("IndexedDBRadio").checked ) {
-    params.filesystem = "IndexedDB";
-  }
-  else if( document.getElementById("LocalStorageRadio").checked ) {
-    params.filesystem = "LocalStorage";
-  }
-  
+  params.args = document.getElementById('args').value.split(' ');  
   HLEngine.start(params);
 }
 

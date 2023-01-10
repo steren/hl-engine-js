@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="MobileOptimized" content="640"/>
 		<meta name="HandheldFriendly" content="true"/>
-		<title>Half-Life engine JS demo</title>
+		<title>Half-Life Engine JS demo</title>
 		<style>
 		  body {
 				font-family: arial;
@@ -82,17 +82,7 @@
 
 		<textarea id="output" rows="8"></textarea>
 
-		<h1 id=optionsTitle>Options</h1>
-
 		<form>
-			
-			Select filesystem for settings and saverestore:<br><br>
-
-			<input name=a type=radio id=IndexedDBRadio />IndexedDB (Need exit correctly to save changes)<br></div>
-			<input name=a type=radio id=LocalStorageRadio  />LocalStorage (Sometimes not enough space)<br>
-			<input name=a type=radio id=None checked=true />None (in RAM)<br><br>
-			
-			<hr>
 			<label for="zip">Select game data as local .zip file:</label><br>
 			<input type=file name="zip" id="zip" /><br>
 
@@ -102,9 +92,7 @@
 		</form>
 
 		<script type='text/javascript' src='browserfs.min.js'></script>
-
 		<script type='text/javascript' src='hl-engine.js'></script>
-
 		<script type='text/javascript' src='index.js'></script>
 
 	</body>
