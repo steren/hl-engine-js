@@ -12,10 +12,10 @@ document.getElementById('start').onclick = function() {
   };
   params.args = document.getElementById('args').value.split(' ');
   
-  if( radioChecked("IndexedDB")) {
+  if( document.getElementById("IndexedDBRadio").checked ) {
     params.filesystem = "IndexedDB";
   }
-  else if( radioChecked("LocalStorage")) {
+  else if( document.getElementById("LocalStorageRadio").checked ) {
     params.filesystem = "LocalStorage";
   }
   

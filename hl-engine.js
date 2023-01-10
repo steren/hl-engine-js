@@ -173,9 +173,6 @@ function skipRun()
   showElement('loader1', false);
   showElement('optionsTitle', true);
 
-  if(window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB)
-    showElement('idbHider', true);
-
   showElement('fSettings',true);
 
   ENV.XASH3D_GAMEDIR = gamedir;
