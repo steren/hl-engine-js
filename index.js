@@ -19,83 +19,79 @@ var Module = {
   TOTAL_MEMORY: mem * 1024 * 1024,
   preRun: [],
   postRun: [],
-  print: (function() {
-    var element = document.getElementById('output');
-    if (element) element.value = ''; // clear browser cache
-    return function(text) {
-      if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-      // These replacements are necessary if you render to raw HTML
-      //text = text.replace(/&/g, "&amp;");
-      //text = text.replace(/</g, "&lt;");
-      //text = text.replace(/>/g, "&gt;");
-      //text = text.replace('\n', '<br>', 'g');
-      //console.log(text);
-      if(text)
-        myerrorbuf += text + '\n';
-      if (element) {
-        if(element.value.length > 65536)
-          element.value = element.value.substring(512) + myerrorbuf;
-        else
-          element.value += myerrorbuf;
-        element.scrollTop = element.scrollHeight; // focus on bottom
-      }
-      myerrorbuf = ''
-    };
-  })(),
-  printErr: function(text) {
-    if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-    if (0) { // XXX disabled for safety typeof dump == 'function') {
-      dump(text + '\n'); // fast, straight to the real console
-    } else {
-      if( myerrorbuf.length > 2048 )
-      myerrorbuf = 'some lines skipped\n'+ myerrorbuf.substring(512);
-      myerrorbuf += text + '\n';
-      if(  new Date() - myerrordate > 3000 )
-      {
-        myerrordate = new Date();
-        Module.print();
-      }
+  print: print,
+  printErr: printErr,
+  canvas: document.getElementById('canvas'),
+  setStatus: setStatus,
+  totalDependencies: 0,
+  monitorRunDependencies: monitorRunDependencies
+};
+
+function monitorRunDependencies(left) {
+  this.totalDependencies = Math.max(this.totalDependencies, left);
+  if(left)
+    Module.setStatus('Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')');
+};
+
+function setStatus(text) {
+  if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+  if (text === Module.setStatus.text) return;
+  if(  new Date() - myerrordate > 3000 )
+  {
+    myerrordate = new Date();
+    Module.print();
+  }
+
+  statusElement.innerHTML = text;
+  if( progressElement )
+  {
+    var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+
+    if(m)
+    {
+      var progress = Math.round(parseInt(m[2])*100/parseInt(m[4]));
+      progressElement.style.color = progress > 5?'#303030':'#aaa000';
+      progressElement.style.width = progressElement.innerHTML = ''+progress+'%';
     }
-  },
-  canvas: (function() {
-    var canvas = document.getElementById('canvas');
+    showElement('progress-box', !!m);
+  }
+};
 
-    // As a default initial behavior, pop up an alert when webgl context is lost. To make your
-    // application robust, you may want to override this behavior before shipping!
-    // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
-    canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
-
-    return canvas;
-  })(),
-  setStatus: function(text) {
-    if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
-    if (text === Module.setStatus.text) return;
+function printErr(text) {
+  if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+  if (0) { // XXX disabled for safety typeof dump == 'function') {
+    dump(text + '\n'); // fast, straight to the real console
+  } else {
+    if( myerrorbuf.length > 2048 )
+    myerrorbuf = 'some lines skipped\n'+ myerrorbuf.substring(512);
+    myerrorbuf += text + '\n';
     if(  new Date() - myerrordate > 3000 )
     {
       myerrordate = new Date();
       Module.print();
     }
-
-    statusElement.innerHTML = text;
-    if( progressElement )
-    {
-      var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
-
-      if(m)
-      {
-        var progress = Math.round(parseInt(m[2])*100/parseInt(m[4]));
-        progressElement.style.color = progress > 5?'#303030':'#aaa000';
-        progressElement.style.width = progressElement.innerHTML = ''+progress+'%';
-      }
-      showElement('progress-box', !!m);
-    }
-  },
-  totalDependencies: 0,
-  monitorRunDependencies: function(left) {
-    this.totalDependencies = Math.max(this.totalDependencies, left);
-    if(left)
-      Module.setStatus('Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')');
   }
+};
+
+function print(text) {
+  var element = document.getElementById('output');
+  if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+  // These replacements are necessary if you render to raw HTML
+  //text = text.replace(/&/g, "&amp;");
+  //text = text.replace(/</g, "&lt;");
+  //text = text.replace(/>/g, "&gt;");
+  //text = text.replace('\n', '<br>', 'g');
+  //console.log(text);
+  if(text)
+    myerrorbuf += text + '\n';
+  if (element) {
+    if(element.value.length > 65536)
+      element.value = element.value.substring(512) + myerrorbuf;
+    else
+      element.value += myerrorbuf;
+    element.scrollTop = element.scrollHeight; // focus on bottom
+  }
+  myerrorbuf = ''
 };
 
 window.onerror = function(event) {
