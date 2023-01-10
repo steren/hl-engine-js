@@ -5,11 +5,8 @@ const HlEngineParams = {
   args: "",
 }
 
-
-document.getElementById('args').onchange = function() {
-  HlEngineParams.args = document.getElementById('args').value.split(' ');
-}
-
 document.getElementById('start').onclick = function() {
+  HlEngineParams.args = document.getElementById('args').value.split(' ');
+
   startXash();
 }
