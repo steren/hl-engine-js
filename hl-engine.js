@@ -42,29 +42,6 @@ window.onerror = function(event) {
 
 var savedRun;
 
-function start(params)
-{
-  console.log("Starting with params: "+JSON.stringify(params));
-  setupFS(params.filesystem);
-  Module.arguments = params.args
-  Module.run = run = savedRun;
-
-  var reader = new FileReader();
-  reader.onload = function(){
-    mountZIP(reader.result);
-    Module.print("Loaded zip data");
-    savedRun();
-  };
-  reader.readAsArrayBuffer(HLEngineParams.zipElement.files[0]);
-  
-  window.addEventListener("beforeunload", function (e) {
-    var confirmationMessage = 'Leave the game?';
-
-    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-  });
-}
-
 function mountZIP(data)
 {
   var Buffer = BrowserFS.BFSRequire('buffer').Buffer;
@@ -160,6 +137,29 @@ function init(params){
   Module.canvas = params.canvas;
   Module.setStatus('Downloading...');
   loadXash();
+}
+
+function start(params)
+{
+  console.log("Starting with params: "+JSON.stringify(params));
+  setupFS(params.filesystem);
+  Module.arguments = params.args
+  Module.run = run = savedRun;
+
+  var reader = new FileReader();
+  reader.onload = function(){
+    mountZIP(reader.result);
+    Module.print("Loaded zip data");
+    savedRun();
+  };
+  reader.readAsArrayBuffer(HLEngineParams.zipElement.files[0]);
+  
+  window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = 'Leave the game?';
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+  });
 }
 
 
