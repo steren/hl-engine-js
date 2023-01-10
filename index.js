@@ -12,6 +12,6 @@ HLEngine.init({
   zipElement: document.getElementById('zip'),
   statusElement: document.getElementById('status'),
   canvas: document.getElementById('canvas'),
-  location: 'hl-engine'
+  location: 'lib'
 });
 
