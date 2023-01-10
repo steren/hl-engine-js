@@ -7,6 +7,10 @@ document.getElementById('start').onclick = function() {
   HLEngine.start(params);
 }
 
+document.getElementById('fullscreen').onclick = function() {
+  Module.requestFullscreen(/* pointerLock */ true, /* resize */ false);
+}
+
 HLEngine.init({
   zipElement: document.getElementById('zip'),
   statusElement: document.getElementById('status'),
