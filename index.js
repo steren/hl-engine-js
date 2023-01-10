@@ -1,14 +1,12 @@
-const HLEngineParams = {
+document.getElementById('start').onclick = function() {
+  const params = {};
+  params.args = document.getElementById('args').value.split(' ');
+  HLEngine.start(params);
+}
+
+HLEngine.init({
   statusElement: document.getElementById('status'),
   progressElement: document.getElementById('progress'),
   printOutput: document.getElementById('output'),
-  args: "",
-}
-
-document.getElementById('start').onclick = function() {
-  HLEngineParams.args = document.getElementById('args').value.split(' ');
-
-  HLEngine.start(HLEngineParams);
-}
-
-HLEngine.init();
+  canvas: document.getElementById('canvas'),
+});

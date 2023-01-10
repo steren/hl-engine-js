@@ -215,7 +215,6 @@ var Module = {
   postRun: [],
   print: print,
   printErr: printErr,
-  canvas: document.getElementById('canvas'),
   setStatus: setStatus,
   totalDependencies: 0,
   monitorRunDependencies: monitorRunDependencies,
@@ -227,9 +226,10 @@ var ENV = [];
 
 
 function init(params){
+  HLEngineParams = params;
+  Module.canvas = params.canvas;
   Module.setStatus('Downloading...');
   loadXash();
-
 }
 
 
