@@ -16,8 +16,8 @@
 				color: white;
 		  }
 
-		  /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-		  canvas.render { 
+			/* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+		  .render { 
 				border: 0px none; 
 				background-color: black;
 				
@@ -26,59 +26,16 @@
 				margin-right: auto; 
 				display: block;
 			}
-
-			#status {
-				float:left;
-			}
-		
-			#progress {
-				text-align:center;
-				background-color:#F0B418;
-				border-color:#555555;
-				border-style:solid;
-				border-width:3px;
-				width:50%;
-				height:20px
-			}
-
-		  #controls {
-				display: inline-block;
-				float: right;
-				vertical-align: top;
-				margin-top: 5px;
-				margin-right: 20px;
-		  }
-
-		  #output {
-				width: 100%;
-				height: 200px;
-				margin: 0 auto;
-				margin-top: 10px;
-				border-left: 0px;
-				border-right: 0px;
-				border-style: solid;
-				padding-left: 0px;
-				padding-right: 0px;
-				display: block;
-				background-color: black;
-				color: white;
-				font-family: 'Lucida Console', Monaco, monospace;
-				outline: none;
-		  }
+	
 		</style>
 	</head>
 
 	<body>
 
+		<input type="button" id="fullscreen" value="Fullscreen">
 		<canvas class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
 		<p id="status">Downloading...</p>
-
-		<div style=width:100%><span id='controls'>
-			<input type="button" id="fullscreen" value="Fullscreen">
-		</span></div>
-
-		<textarea id="output" rows="8"></textarea>
 
 		<form>
 			<label for="zip">Select game data as local .zip file:</label><br>
@@ -92,6 +49,5 @@
 		<script type='text/javascript' src='browserfs.min.js'></script>
 		<script type='text/javascript' src='hl-engine.js'></script>
 		<script type='text/javascript' src='index.js'></script>
-
 	</body>
 </html>

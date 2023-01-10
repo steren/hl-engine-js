@@ -14,8 +14,6 @@ document.getElementById('fullscreen').onclick = function() {
 HLEngine.init({
   zipElement: document.getElementById('zip'),
   statusElement: document.getElementById('status'),
-  progressElement: document.getElementById('progress'),
-  printOutput: document.getElementById('output'),
   canvas: document.getElementById('canvas'),
 });
 

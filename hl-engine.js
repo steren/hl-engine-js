@@ -23,49 +23,7 @@ function setStatus(text) {
     myerrordate = new Date();
     Module.print();
   }
-
   HLEngineParams.statusElement.innerHTML = text;
-  if( HLEngineParams.progressElement )
-  {
-    var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
-
-    if(m)
-    {
-      var progress = Math.round(parseInt(m[2])*100/parseInt(m[4]));
-      HLEngineParams.progressElement.style.color = progress > 5?'#303030':'#aaa000';
-      HLEngineParams.progressElement.style.width = HLEngineParams.progressElement.innerHTML = ''+progress+'%';
-    }
-  }
-};
-
-function printErr(text) {
-  if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-  if (0) { // XXX disabled for safety typeof dump == 'function') {
-    dump(text + '\n'); // fast, straight to the real console
-  } else {
-    if( myerrorbuf.length > 2048 )
-    myerrorbuf = 'some lines skipped\n'+ myerrorbuf.substring(512);
-    myerrorbuf += text + '\n';
-    if(  new Date() - myerrordate > 3000 )
-    {
-      myerrordate = new Date();
-      Module.print();
-    }
-  }
-};
-
-function print(text) {
-  if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-  if(text)
-    myerrorbuf += text + '\n';
-  if (HLEngineParams.printOutput) {
-    if(HLEngineParams.printOutput.value.length > 65536)
-      HLEngineParams.printOutput.value = HLEngineParams.printOutput.value.substring(512) + myerrorbuf;
-    else
-      HLEngineParams.printOutput.value += myerrorbuf;
-    HLEngineParams.printOutput.scrollTop = HLEngineParams.printOutput.scrollHeight; // focus on bottom
-  }
-  myerrorbuf = ''
 };
 
 window.onerror = function(event) {
@@ -185,8 +143,8 @@ var Module = {
   TOTAL_MEMORY: mem * 1024 * 1024,
   preRun: [],
   postRun: [],
-  print: print,
-  printErr: printErr,
+  print: console.log,
+  printErr: console.log,
   setStatus: setStatus,
   totalDependencies: 0,
   monitorRunDependencies: monitorRunDependencies,
