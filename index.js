@@ -4,14 +4,17 @@ document.getElementById('start').onclick = function() {
     map: document.getElementById('map').value,
     filesystem: "RAM",
     fullscreen: true,
+    zip: document.getElementById('zip'),
   };
   HLEngine.start(params);
 }
 
-HLEngine.init({
-  zipElement: document.getElementById('zip'),
-  statusElement: document.getElementById('status'),
-  canvas: document.getElementById('canvas'),
-  location: 'lib'
-});
+function setStatus(text) {
+  document.getElementById('status').innerHTML = text;
+}
 
+HLEngine.init({
+  canvas: document.getElementById('canvas'),
+  location: 'lib',
+  setStatus: setStatus,
+});

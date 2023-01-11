@@ -13,15 +13,15 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
 * Initialize the engine:
   ```javascript
   HLEngine.init({
-    zipElement: document.getElementById('zip'),
-    statusElement: document.getElementById('status'),
     canvas: document.getElementById('canvas'), // an existing <canvas> element where the game will be rendered
     location: 'lib', // URL path to the library and other files of this repo
+    setStatus: (text) => { console.log(text); }, // Optional, a function to display status messages
   });
   ```
 * Start the game:
   ```javascript
   HLEngine.start({
+    zip: document.getElementById('zip'), // game files, either an <input type="file"> element or an ArrayBuffer of the zip file.
     filesystem: "RAM", //default, can be "IndexedDB" or "LocalStorage" 
     fullscreen: true,
     game: "valve", // the game to load, for example "cstrike"
