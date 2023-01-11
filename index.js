@@ -1,10 +1,10 @@
 document.getElementById('start').onclick = function() {
   const params = {
-    args: "",
-    filesystem: "RAM", //default, can be "IndexedDB" or "LocalStorage" 
+    game: document.getElementById('game').value,
+    map: document.getElementById('map').value,
+    filesystem: "RAM",
     fullscreen: true,
   };
-  params.args = document.getElementById('args').value.split(' ');  
   HLEngine.start(params);
 }
 
