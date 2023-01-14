@@ -28,3 +28,8 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
     map: "", // optional the map to load, for example "de_dust2"
   });
   ```
+
+  * Go fullscreen
+  ```javascript
+  HLEngine.fullscreen()
+  ```
