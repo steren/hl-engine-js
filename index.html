@@ -26,12 +26,19 @@
 				margin-right: auto; 
 				display: block;
 			}
+
+			#fullscreen {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
 	
 		</style>
 	</head>
 
 	<body>
 		<canvas class="render" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+		<button id="fullscreen">Fullscreen</button>
 
 		<p id="status">Downloading...</p>
 
@@ -44,6 +51,7 @@
 
 			<input type="button" id="start" value="Start" />
 		</form>
+
 
 		<script type='text/javascript' src='browserfs.min.js'></script>
 		<script type='text/javascript' src='lib/hl-engine.js'></script>

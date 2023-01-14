@@ -1,4 +1,4 @@
-document.getElementById('start').onclick = function() {
+document.getElementById('start').onclick = () => {
   const params = {
     game: document.getElementById('game').value,
     map: document.getElementById('map').value,
@@ -8,6 +8,8 @@ document.getElementById('start').onclick = function() {
   };
   HLEngine.start(params);
 }
+
+document.getElementById('fullscreen').onclick = HLEngine.fullscreen
 
 function setStatus(text) {
   document.getElementById('status').innerHTML = text;
