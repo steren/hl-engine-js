@@ -19,13 +19,19 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
   });
   ```
 * Start the game:  
-  You mush pass a .zip file containing the game files, the archive must contain a `valve` folder and optionally other mod folders.
+  You mush pass either one .zip file containing the game files (a `valve` folder and optionally other mod folder).
+  Or you must pass two .zip files, one with the content of the `valve` folder and with the content of the mod folder.
   ```javascript
   HLEngine.start({
-    zip: document.getElementById('zip'), // game files, either an <input type="file"> element or an ArrayBuffer of the zip file.
-    filesystem: "RAM", //default, can be "IndexedDB" or "LocalStorage" 
-    fullscreen: true,
-    game: "valve", // the game to load, for example "cstrike"
+    // Game files as an ArrayBuffer of the zip file. 
+    // Must contain a valve folder
+    // See index.js for example of how to load from an <input> element
+    zip: 
+    // Alternatively, pass two zips: one including the inside of valve folder and one with the inside of the mod folder
+    zipValve: // ArrayBuffer of a zip file of the inside of the valve folder.
+    zipMod: // ArrayBuffer of a zip file of the inside of the valve folder.
+    // Optional parameters
+    mod: "", // the mod to load, for example "cstrike", if zipMod is passed, must match the mod name
     map: "", // optional the map to load, for example "de_dust2"
   });
   ```
