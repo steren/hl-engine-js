@@ -18,7 +18,8 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
     setStatus: (text) => { console.log(text); }, // Optional, a function to display status messages
   });
   ```
-* Start the game:
+* Start the game:  
+  You mush pass a .zip file containing the game files, the archive must contain a `valve` folder and optionally other mod folders.
   ```javascript
   HLEngine.start({
     zip: document.getElementById('zip'), // game files, either an <input type="file"> element or an ArrayBuffer of the zip file.
@@ -29,7 +30,7 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
   });
   ```
 
-  * Go fullscreen
+* Go fullscreen
   ```javascript
   HLEngine.fullscreen()
   ```
