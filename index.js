@@ -1,3 +1,5 @@
+import {init, start, fullscreen} from './lib/hl-engine.js';
+
 document.getElementById('start').onclick = () => {
   const reader = new FileReader();
   reader.onload = function(){
@@ -8,18 +10,18 @@ document.getElementById('start').onclick = () => {
       fullscreen: true,
       zip: reader.result,
     };
-    HLEngine.start(params);
+    start(params);
   }
   reader.readAsArrayBuffer(document.getElementById('zip').files[0]);
 }
 
-document.getElementById('fullscreen').onclick = HLEngine.fullscreen
+document.getElementById('fullscreen').onclick = fullscreen
 
 function setStatus(text) {
   document.getElementById('status').innerHTML = text;
 }
 
-HLEngine.init({
+init({
   canvas: document.getElementById('canvas'),
   location: 'lib',
   setStatus: setStatus,
