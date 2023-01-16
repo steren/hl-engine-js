@@ -14,7 +14,7 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
   - load this module: `import {init, start, fullscreen} from './lib/hl-engine.js';`
   - Initialize the engine:
     ```javascript
-    HLEngine.init({
+    init({
       canvas: document.getElementById('canvas'), // an existing <canvas> element where the game will be rendered
       location: 'lib', // URL path to the library and other files of this repo
       setStatus: (text) => { console.log(text); }, // Optional, a function to display status messages
@@ -24,7 +24,7 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
     You mush pass either one .zip file containing the game files (a `valve` folder and optionally other mod folder).
     Or you must pass two .zip files, one with the content of the `valve` folder and with the content of the mod folder.
     ```javascript
-    HLEngine.start({
+    start({
       // Game files as an ArrayBuffer of the zip file. 
       // Must contain a valve folder
       // See index.js for example of how to load from an <input> element
@@ -39,5 +39,5 @@ It ic currently based on an old JavaScript port [(Xash3D-Emscripten)](https://gi
     ```
   - Go fullscreen
     ```javascript
-    HLEngine.fullscreen()
+    fullscreen();
     ```
