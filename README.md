@@ -21,7 +21,7 @@ It is currently based on an old JavaScript port ([Xash3D-Emscripten](https://git
     });
     ```
   - Start the game:  
-    You mush pass either one .zip file containing the game files (a `valve` folder and optionally other mod folder).
+    You must pass either one .zip file containing the game files (a `valve` folder and optionally other mod folder).
     Or you must pass two .zip files, one with the content of the `valve` folder and with the content of the mod folder.
     ```javascript
     start({
