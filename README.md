@@ -37,6 +37,7 @@ It is currently based on an old JavaScript port ([Xash3D-Emscripten](https://git
       // Optional parameters
       mod: "", // the mod to load, for example "cstrike", if zipMod is passed, must match the mod name
       map: "", // optional the map to load, for example "de_dust2"
+      args: ['-width', '1920', '-height', '1080'] // optional array of strings as launch paramters
     });
     ```
   - Go fullscreen
